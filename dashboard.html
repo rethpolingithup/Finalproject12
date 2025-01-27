@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form and Dashboard</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            background-color: #f4f7fc;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            height: 100%;
+            padding-top: 20px;
+            position: fixed;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            color: #ecf0f1;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #34495e;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-container input {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .user-info p {
+            font-size: 18px;
+            color: #34495e;
+        }
+
+        .dashboard-summary {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 30%;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            color: #34495e;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #7f8c8d;
+        }
+
+        .task-overview h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #34495e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .calendar {
+            margin-top: 40px;
+        }
+
+        .calendar h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #34495e;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .calendar-day {
+            background-color: #ecf0f1;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 18px;
+            color: #34495e;
+        }
+
+        .calendar-day:nth-child(1) {
+            color: #e74c3c;
+        }
+
+        .calendar-day:nth-child(7) {
+            color: #e74c3c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 200px;
+            }
+
+            .dashboard-summary {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+
+            .calendar-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 180px;
+            }
+
+            .main-content {
+                margin-left: 180px;
+            }
+
+            .dashboard-summary {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+
+            .calendar-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar" id="dashboard" class="hidden">
+        <h2>Dashboard</h2>
+        <ul>
+            <li><a href="#">Overview</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Tasks</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content" id="dashboard" class="hidden">
+        <div class="top-bar">
+            <div class="search-container">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="user-info">
+                <p>Hello, User</p>
+            </div>
+        </div>
+
+        <div class="dashboard-summary">
+            <div class="card">
+                <h3>Projects</h3>
+                <p>5 Active Projects</p>
+            </div>
+            <div class="card">
+                <h3>Tasks</h3>
+                <p>15 Pending Tasks</p>
+            </div>
+            <div class="card">
+                <h3>Team Members</h3>
+                <p>8 Team Members</p>
+            </div>
+        </div>
+
+        <div class="task-overview">
+            <h2>Tasks Overview</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Status</th>
+                        <th>Deadline</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Design Website</td>
+                        <td>In Progress</td>
+                        <td>2024-12-10</td>
+                    </tr>
+                    <tr>
+                        <td>Develop API</td>
+                        <td>Pending</td>
+                        <td>2024-12-15</td>
+                    </tr>
+                    <tr>
+                        <td>Test Application</td>
+                        <td>Not Started</td>
+                        <td>2024-12-20</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="calendar">
+            <h2>Calendar</h2>
+            <div class="calendar-grid">
+                <div class="calendar-day">Mon</div>
+                <div class="calendar-day">Tue</div>
+                <div class="calendar-day">Wed</div>
+                <div class="calendar-day">Thu</div>
+                <div class="calendar-day">Fri</div>
+                <div class="calendar-day">Sat</div>
+                <div class="calendar-day">Sun</div>
+            </div>
+            <div class="calendar-grid">
+                <div class="calendar-day">1</div>
+                <div class="calendar-day">2</div>
+                <div class="calendar-day">3</div>
+                <div class="calendar-day">4</div>
+                <div class="calendar-day">5</div>
+                <div class="calendar-day">6</div>
+                <div class="calendar-day">7</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
